@@ -54,7 +54,10 @@ exports.machinereadable_list = (input) ->
 		line = line.replace(/^(.+):\d+,/, '$1:0.')
 		line = line.replace(/"@.*$/, '"')
 
-		return JSON.parse("{#{line}}")
+		try
+			return JSON.parse("{#{line}}")
+		catch e
+			return {}
 
 	return input.split('\n').map(to_item).reduce(to_object)
 
